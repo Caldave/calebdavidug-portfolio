@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Caleb David Ugwabor - Professional Portfolio</title>
+  <script src="https://cdn.jsdelivr.net/npm/react@18/umd/react.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/babel-standalone@6/babel.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <style>
+    body {
+      font-family: 'Open Sans', sans-serif;
+      scroll-behavior: smooth;
+      background: #f7fafc;
+      color: #1a202c;
+    }
+    h1, h2, h3 {
+      font-family: 'Poppins', sans-serif;
+    }
+    .nav-link { transition: color 0.3s; }
+    .nav-link:hover { color: #ff6b6b; }
+    .project-card {
+      transition: transform 0.3s, box-shadow 0.3s;
+      border: 2px solid transparent;
+      background: linear-gradient(135deg, #2dd4bf, #ff6b6b);
+      padding: 2px;
+      border-radius: 12px;
+    }
+    .project-card-inner {
+      background: #fff;
+      border-radius: 10px;
+      padding: 1.5rem;
+    }
+    .project-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
+    .hero {
+      background: linear-gradient(135deg, #2dd4bf, #ff6b6b);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://via.placeholder.com/1920x1080.png?text=Abstract+Background') center/cover;
+      opacity: 0.2;
+      z-index: 0;
+    }
+    .divider {
+      height: 50px;
+      background: linear-gradient(135deg, #2dd4bf, #ff6b6b);
+      clip-path: polygon(0 0, 100% 100%, 0 100%);
+    }
+    .progress-bar {
+      height: 8px;
+      background: #2dd4bf;
+      border-radius: 4px;
+    }
+    .social-icon { transition: transform 0.3s; }
+    .social-icon:hover { transform: scale(1.2); }
+    .cursor {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      background: rgba(45, 212, 191, 0.3);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+</head>
+<body>
+  <div class="cursor" id="cursor"></div>
+  <nav class="bg-charcoal-900 text-white fixed w-full top-0 z-20 shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold">Caleb David Ugwabor</h1>
+      <div class="space-x-6">
+        <a href="#home" class="nav-link">Home</a>
+        <a href="#skills" class="nav-link">Skills</a>
+        <a href="#experience" class="nav-link">Experience</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#testimonials" class="nav-link">Testimonials</a>
+        <a href="#certifications" class="nav-link">Certifications</a>
+        <a href="#education" class="nav-link">Education</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <section id="home" class="hero min-h-screen flex items-center justify-center text-white pt-16 relative" data-aos="fade-up">
+    <div class="max-w-4xl mx-auto px-4 text-center z-10">
+      <h2 class="text-5xl font-bold mb-4">Crafting Exceptional User Experiences</h2>
+      <p class="text-lg mb-6">With over five years in customer service, UI/UX, web design, and administrative support, I deliver tech-driven solutions that enhance client satisfaction and streamline workflows. Let’s create something extraordinary together.</p>
+      <a href="#contact" class="bg-coral-500 text-white px-8 py-3 rounded-full hover:bg-coral-600 transition">Get in Touch</a>
+    </div>
+  </section>
+  <div class="divider"></div>
+
+  <section id="skills" class="py-16 bg-white" data-aos="fade-up">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-8 text-center">Skills & Expertise</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div>
+          <h3 class="text-xl font-semibold mb-2">Virtual Assistance</h3>
+          <ul class="list-disc pl-5 mb-4">
+            <li>CRM (Notion, Trello, HubSpot, Asana, Zoho)</li>
+            <li>Calendar Management</li>
+            <li>Customer Support</li>
+            <li>Slack, Zoom, Google Calendar, Microsoft Teams</li>
+          </ul>
+          <div class="mb-2"><span>HubSpot</span><div class="progress-bar w-4/5"></div></div>
+          <div><span>Asana</span><div class="progress-bar w-3/4"></div></div>
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold mb-2">UI/UX & Web Development</h3>
+          <ul class="list-disc pl-5 mb-4">
+            <li>Figma, Adobe XD, Sketch</li>
+            <li>HTML, CSS, JavaScript (ES6+)</li>
+            <li>React.js, Tailwind CSS, Bootstrap</li>
+            <li>WordPress, Visual Studio Code</li>
+          </ul>
+          <div class="mb-2"><span>Figma</span><div class="progress-bar w-9/10"></div></div>
+          <div><span>React.js</span><div class="progress-bar w-7/10"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="divider"></div>
+
+  <section id="experience" class="py-16 bg-offwhite" data-aos="fade-up">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-8 text-center">Professional Experience</h2>
+      <div class="space-y-6">
+        <div data-aos="fade-right">
+          <h3 class="text-xl font-semibold">Customer Service Representative, EchoDesk (Remote)</h3>
+          <p class="text-gray-600">Sep 2023 - Present</p>
+          <ul class="list-disc pl-5">
+            <li>Handle 60+ daily inquiries via phone, email, and chat, achieving 97% satisfaction.</li>
+            <li>Improved response time by 30% through optimized workflows.</li>
+          </ul>
+        </div>
+        <div data-aos="fade-left">
+          <h3 class="text-xl font-semibold">UI/UX & Web Designer, Nexora Digital (Remote)</h3>
+          <p class="text-gray-600">Jan 2022 - Aug 2023</p>
+          <ul class="list-disc pl-5">
+            <li>Designed responsive UI prototypes in Figma, boosting engagement by 22%.</li>
+            <li>Developed websites using HTML, CSS, and JavaScript, cutting development time by 15%.</li>
+          </ul>
+        </div>
+        <div data-aos="fade-right">
+          <h3 class="text-xl font-semibold">Graphic Designer, Artiva (Intern)</h3>
+          <p class="text-gray-600">May 2021 - Nov 2021</p>
+          <ul class="list-disc pl-5">
+            <li>Produced 10+ weekly social media graphics, boosting engagement by 70%.</li>
+          </ul>
+        </div>
+        <div data-aos="fade-left">
+          <h3 class="text-xl font-semibold">Executive Administrative Assistant, EliteOrbit (Remote)</h3>
+          <p class="text-gray-600">Feb 2020 - May 2021</p>
+          <ul class="list-disc pl-5">
+            <li>Managed scheduling and CRM updates for executives.</li>
+            <li>Coordinated virtual meetings and streamlined workflows.</li>
+          </ul>
+        </div>
+        <div data-aos="fade-right">
+          <h3 class="text-xl font-semibold">Web Designer, Launchsync (Intern)</h3>
+          <p class="text-gray-600">Nov 2018 - Nov 2019</p>
+          <ul class="list-disc pl-5">
+            <li>Built responsive websites using HTML, CSS, and JavaScript.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="divider"></div>
+
+  <section id="projects" class="py-16 bg-white" data-aos="fade-up">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-8 text-center">Selected Projects</h2>
+      <div id="project-container" class="grid grid-cols-1 sm:grid-cols-2 gap-6"></div>
+    </div>
+  </section>
+  <div class="divider"></div>
+
+  <section id="testimonials" class="py-16 bg-offwhite" data-aos="fade-up">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-8 text-center">What Colleagues Say</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div class="bg-white p-6 rounded-lg shadow-md" data-aos="zoom-in">
+          <p class="italic">"Caleb’s empathy and problem-solving skills transformed our customer support at EchoDesk, achieving 97% satisfaction."</p>
+          <p class="mt-4 font-semibold">- Team Lead, EchoDesk</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md" data-aos="zoom-in">
+          <p class="italic">"His UI/UX designs at Nexora Digital were intuitive and boosted engagement by 22%. A true professional."</p>
+          <p class="mt-4 font-semibold">- Project Manager, Nexora Digital</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="divider"></div>
+
+  <section id="certifications" class="py-16 bg-white" data-aos="fade-up">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-8 text-center">Certifications</h2>
+      <ul class="list-disc pl-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <li>Virtual Assistance Certification, Udemy</li>
+        <li>UI/UX Design Specialization, Google</li>
+        <li>Frontend Developer Certificate, SheCodes</li>
+        <li>Virtual Assistant Basics, Skillshare</li>
+        <li>Customer Service Excellence, Coursera</li>
+        <li>Emotional Intelligence in the Workplace, MindTools</li>
+        <li>Graphic Design with Canva, YouTube Academy</li>
+        <li>Remote Work Professional Certificate, Remote Skills Academy</li>
+      </ul>
+    </div>
+  </section>
+  <div class="divider"></div>
+
+  <section id="education" class="py-16 bg-offwhite" data-aos="fade-up">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-8 text-center">Education</h2>
+      <div class="space-y-4">
+        <div>
+          <h3 class="text-xl font-semibold">B.Sc. Industrial Chemistry (Second Class Upper)</h3>
+          <p class="text-gray-600">University of Benin, Nigeria | Oct 2018 - Jan 2024</p>
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold">National Youth Service Corps</h3>
+          <p class="text-gray-600">CWAY Nigeria Drinking Water Science & Technology Company Limited | Apr 2024 - Apr 2025</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="divider"></div>
+
+  <section id="contact" class="py-16 bg-white" data-aos="fade-up">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-8 text-center">Get in Touch</h2>
+      <div class="flex flex-col sm:flex-row gap-6">
+        <div class="flex-1">
+          <p class="mb-4">Let’s collaborate on your next project in customer support, UI/UX, or web design.</p>
+          <p><strong>Email:</strong> <a href="mailto:calebdavidug@gmail.com" class="text-teal-500 hover:underline">calebdavidug@gmail.com</a></p>
+          <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/caleb-david-ug" target="_blank" class="text-teal-500 hover:underline">linkedin.com/in/caleb-david-ug</a></p>
+        </div>
+        <div class="flex-1">
+          <form class="space-y-4">
+            <input type="text" placeholder="Name" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-teal-500" />
+            <input type="email" placeholder="Email" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-teal-500" />
+            <textarea placeholder="Message" class="w-full p-3 border rounded-lg h-32 focus:ring-2 focus:ring-teal-500"></textarea>
+            <button type="submit" class="bg-coral-500 text-white px-8 py-3 rounded-lg hover:bg-coral-600 transition">Send</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-charcoal-900 text-white py-8 text-center">
+    <div class="flex justify-center space-x-6 mb-4">
+      <a href="https://linkedin.com/in/caleb-david-ug" target="_blank" class="social-icon">
+        <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"></path></svg>
+      </a>
+      <a href="https://github.com/calebdavidug" target="_blank" class="social-icon">
+        <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75.98.8-.23 1.65-.34 2.5-.34s1.7.11 2.5.34c1.91-1.25 2.75-.98 2.75-.98.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"></path></svg>
+      </a>
+    </div>
+    <p>© 2025 Caleb David Ugwabor. All rights reserved.</p>
+  </footer>
+
+  <script type="text/babel">
+    const projects = [
+      {
+        title: "CRM Workflow Optimization",
+        description: "Streamlined customer inquiry handling at EchoDesk using HubSpot, reducing response time by 30% and boosting satisfaction to 97%.",
+        tools: "HubSpot, Notion",
+        link: "./projects/crm-optimization.html"
+      },
+      {
+        title: "AI Chatbot Support System",
+        description: "Designed a chatbot interface for EchoDesk with Figma and JavaScript, improving first-contact resolution by 25% for remote teams.",
+        tools: "Figma, JavaScript",
+        link: "./projects/chatbot-system.html"
+      },
+      {
+        title: "Mobile Banking App UI",
+        description: "Created a user-friendly mobile banking app prototype in Figma at Nexora Digital, enhancing navigation and increasing engagement by 20%.",
+        tools: "Figma, Adobe XD",
+        link: "./projects/mobile-banking-ui.html"
+      },
+      {
+        title: "SaaS Platform Redesign",
+        description: "Redesigned a SaaS platform's UI/UX in Figma for Nexora Digital, improving usability and reducing onboarding time by 15%.",
+        tools: "Figma, Sketch",
+        link: "./projects/saas-redesign.html"
+      },
+      {
+        title: "Freelance Portfolio Website",
+        description: "Developed a responsive portfolio site using HTML, CSS, JavaScript, and WordPress at Launchsync, ensuring cross-device compatibility.",
+        tools: "HTML, CSS, JavaScript, WordPress",
+        link: "./projects/portfolio-website.html"
+      },
+      {
+        title: "Executive Workflow Automation",
+        description: "Automated scheduling and CRM updates at EliteOrbit using Asana and Zoho, cutting meeting prep time by 20%.",
+        tools: "Asana, Zoho, Google Calendar",
+        link: "./projects/workflow-automation.html"
+      },
+      {
+        title: "Event Planning Company Website",
+        description: "Designed and developed a vibrant website for an event planning company using HTML, CSS, JavaScript, and WordPress, boosting client inquiries by 25%.",
+        tools: "HTML, CSS, JavaScript, WordPress",
+        link: "./projects/event-planning-website.html"
+      }
+    ];
+
+    const ProjectCard = ({ title, description, tools, link }) => (
+      <div className="project-card">
+        <div className="project-card-inner">
+          <h3 className="text-xl font-semibold mb-2">{title}</h3>
+          <p className="mb-2">{description}</p>
+          <p className="text-sm text-gray-600 mb-4"><strong>Tools:</strong> {tools}</p>
+          <a href={link} target="_blank" className="bg-teal-500 text-white px-4 py-2 rounded-lg hover:bg-teal-600 transition">View Project</a>
+        </div>
+      </div>
+    );
+
+    const ProjectList = () => (
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        {projects.map((project, index) => (
+          <ProjectCard key={index} title={project.title} description={project.description} tools={project.tools} link={project.link} />
+        ))}
+      </div>
+    );
+
+    const root = ReactDOM.createRoot(document.getElementById('project-container'));
+    root.render(<ProjectList />);
+  </script>
+  <script>
+    AOS.init({ duration: 1000 });
+    const cursor = document.getElementById('cursor');
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = e.pageX + 'px';
+      cursor.style.top = e.pageY + 'px';
+    });
+  </script>
+</body>
+</html>
