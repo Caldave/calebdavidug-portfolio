@@ -3,93 +3,155 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Caleb David Ugwabor - Professional Portfolio</title>
+  <title>Caleb David Ugwabor - Portfolio</title>
   <script src="https://cdn.jsdelivr.net/npm/react@18/umd/react.production.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.production.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/babel-standalone@6/babel.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Lora&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: 'Open Sans', sans-serif;
-      scroll-behavior: smooth;
-      background: #f7fafc;
-      color: #1a202c;
+      font-family: 'Lora', serif;
+      background: #FFFFFF;
+      color: #2D2D2D;
+      overflow-x: hidden;
     }
     h1, h2, h3 {
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Montserrat', sans-serif;
     }
-    .nav-link { transition: color 0.3s; }
-    .nav-link:hover { color: #ff6b6b; }
-    .project-card {
-      transition: transform 0.3s, box-shadow 0.3s;
-      border: 2px solid transparent;
-      background: linear-gradient(135deg, #2dd4bf, #ff6b6b);
-      padding: 2px;
-      border-radius: 12px;
+    .navbar {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     }
-    .project-card-inner {
-      background: #fff;
-      border-radius: 10px;
-      padding: 1.5rem;
+    .nav-link {
+      transition: color 0.3s ease;
     }
-    .project-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    .nav-link:hover {
+      color: #D4A017;
     }
     .hero {
-      background: linear-gradient(135deg, #2dd4bf, #ff6b6b);
+      background: url(./img/Remote.JPEG) center/cover;
       position: relative;
-      overflow: hidden;
     }
-    .hero::before {
+    .hero::after {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: url('https://via.placeholder.com/1920x1080.png?text=Abstract+Background') center/cover;
-      opacity: 0.2;
-      z-index: 0;
+      background: rgba(30, 42, 68, 0.7);
     }
-    .divider {
-      height: 50px;
-      background: linear-gradient(135deg, #2dd4bf, #ff6b6b);
-      clip-path: polygon(0 0, 100% 100%, 0 100%);
+    .project-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid #D4A017;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
     }
-    .progress-bar {
-      height: 8px;
-      background: #2dd4bf;
-      border-radius: 4px;
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
     }
-    .social-icon { transition: transform 0.3s; }
-    .social-icon:hover { transform: scale(1.2); }
-    .cursor {
-      position: fixed;
-      width: 20px;
-      height: 20px;
-      background: rgba(45, 212, 191, 0.3);
+    .project-overlay {
+      background: rgba(30, 42, 68, 0.8);
+      transition: opacity 0.3s ease;
+      opacity: 0;
+    }
+    .project-card:hover .project-overlay {
+      opacity: 1;
+    }
+    .timeline-item {
+      position: relative;
+      padding-left: 2rem;
+      border-left: 2px solid #D4A017;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -8px;
+      top: 0;
+      width: 16px;
+      height: 16px;
+      background: #D4A017;
       border-radius: 50%;
-      pointer-events: none;
-      z-index: 9999;
-      transform: translate(-50%, -50%);
+    }
+    .skill-badge {
+      background: #6B7280;
+      color: #FFFFFF;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+    }
+    .filter-btn {
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+    .filter-btn.active {
+      background: #D4A017;
+      color: #FFFFFF;
+    }
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      background: #D4A017;
+      z-index: 1000;
+    }
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    .modal-content {
+      background: #FFFFFF;
+      padding: 2rem;
+      border-radius: 12px;
+      max-width: 600px;
+      width: 90%;
+      position: relative;
+    }
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    .stats-item {
+      background: #FFFFFF;
+      border: 1px solid #D4A017;
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: center;
+    }
+    .about-section {
+      background: #F9FAFB;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     }
   </style>
 </head>
 <body>
-  <div class="cursor" id="cursor"></div>
-  <nav class="bg-charcoal-900 text-white fixed w-full top-0 z-20 shadow-lg">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-      <h1 class="text-2xl font-bold">Caleb David Ugwabor</h1>
+  <div class="scroll-progress" id="scrollProgress"></div>
+  <nav class="navbar fixed w-full top-0 z-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center text-white">
+      <h1 class="text-2xl font-semibold">Caleb David Ugwabor</h1>
       <div class="space-x-6">
         <a href="#home" class="nav-link">Home</a>
+        <a href="#about" class="nav-link">About</a>
         <a href="#skills" class="nav-link">Skills</a>
         <a href="#experience" class="nav-link">Experience</a>
         <a href="#projects" class="nav-link">Projects</a>
-        <a href="#testimonials" class="nav-link">Testimonials</a>
         <a href="#certifications" class="nav-link">Certifications</a>
         <a href="#education" class="nav-link">Education</a>
         <a href="#contact" class="nav-link">Contact</a>
@@ -97,82 +159,90 @@
     </div>
   </nav>
 
-  <section id="home" class="hero min-h-screen flex items-center justify-center text-white pt-16 relative" data-aos="fade-up">
+  <section id="home" class="hero min-h-screen flex items-center justify-center text-white relative">
     <div class="max-w-4xl mx-auto px-4 text-center z-10">
-      <h2 class="text-5xl font-bold mb-4">Crafting Exceptional User Experiences</h2>
-      <p class="text-lg mb-6">With over five years in customer service, UI/UX, web design, and administrative support, I deliver tech-driven solutions that enhance client satisfaction and streamline workflows. Let’s create something extraordinary together.</p>
-      <a href="#contact" class="bg-coral-500 text-white px-8 py-3 rounded-full hover:bg-coral-600 transition">Get in Touch</a>
+      <h2 class="text-5xl font-semibold mb-4">Delivering Smooth Digital Experience with Reliable Support, and Clean Design.</h2>
+      <p class="text-lg mb-6">Crafting innovative solutions that empower businesses and delight users through expertise in UI/UX, web design, customer support, and administrative efficiency.</p>
+      <a href="#contact" class="inline-block bg-[#D4A017] text-white px-8 py-3 rounded-lg hover:bg-[#B88E14] transition">Connect with Me</a>
     </div>
   </section>
-  <div class="divider"></div>
 
-  <section id="skills" class="py-16 bg-white" data-aos="fade-up">
+  <section id="about" class="py-16 bg-white">
     <div class="max-w-4xl mx-auto px-4">
-      <h2 class="text-3xl font-bold mb-8 text-center">Skills & Expertise</h2>
+      <h2 class="text-3xl font-semibold mb-8 text-center">About Me</h2>
+      <div class="about-section p-8">
+        <p class="mb-4">I am a dynamic professional with a knack for turning challenges into opportunities through exceptional customer support, meticulous administrative assistance, and cutting-edge UI/UX and web design. My strength lies in understanding user needs, delivering empathetic and efficient support, and creating intuitive digital experiences that drive engagement and satisfaction.</p>
+        <p>Whether streamlining complex administrative processes with tools like Asana and Zoho, designing responsive websites with WordPress and React, or crafting user-friendly interfaces in Figma, I bring creativity, precision, and adaptability to every project. My collaborative approach and passion for innovation ensure that businesses achieve operational excellence and users enjoy seamless, delightful interactions.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-3xl font-semibold mb-8 text-center">Expertise & Tools</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <div>
-          <h3 class="text-xl font-semibold mb-2">Virtual Assistance</h3>
-          <ul class="list-disc pl-5 mb-4">
-            <li>CRM (Notion, Trello, HubSpot, Asana, Zoho)</li>
-            <li>Calendar Management</li>
-            <li>Customer Support</li>
-            <li>Slack, Zoom, Google Calendar, Microsoft Teams</li>
-          </ul>
-          <div class="mb-2"><span>HubSpot</span><div class="progress-bar w-4/5"></div></div>
-          <div><span>Asana</span><div class="progress-bar w-3/4"></div></div>
+          <h3 class="text-xl font-semibold mb-4">Virtual Assistance & Support</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-badge">HubSpot: Expert</span>
+            <span class="skill-badge">Asana: Advanced</span>
+            <span class="skill-badge">Notion: Advanced</span>
+            <span class="skill-badge">Google Calendar</span>
+            <span class="skill-badge">Microsoft Teams</span>
+            <span class="skill-badge">Zoho</span>
+          </div>
         </div>
         <div>
-          <h3 class="text-xl font-semibold mb-2">UI/UX & Web Development</h3>
-          <ul class="list-disc pl-5 mb-4">
-            <li>Figma, Adobe XD, Sketch</li>
-            <li>HTML, CSS, JavaScript (ES6+)</li>
-            <li>React.js, Tailwind CSS, Bootstrap</li>
-            <li>WordPress, Visual Studio Code</li>
-          </ul>
-          <div class="mb-2"><span>Figma</span><div class="progress-bar w-9/10"></div></div>
-          <div><span>React.js</span><div class="progress-bar w-7/10"></div></div>
+          <h3 class="text-xl font-semibold mb-4">UI/UX & Web Development</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-badge">Figma: Expert</span>
+            <span class="skill-badge">React.js: Advanced</span>
+            <span class="skill-badge">HTML/CSS: Expert</span>
+            <span class="skill-badge">JavaScript: Advanced</span>
+            <span class="skill-badge">WordPress</span>
+            <span class="skill-badge">Adobe XD</span>
+            <span class="skill-badge">Sketch</span>
+          </div>
         </div>
       </div>
     </div>
   </section>
-  <div class="divider"></div>
 
-  <section id="experience" class="py-16 bg-offwhite" data-aos="fade-up">
+  <section id="experience" class="py-16 bg-gray-50">
     <div class="max-w-4xl mx-auto px-4">
-      <h2 class="text-3xl font-bold mb-8 text-center">Professional Experience</h2>
-      <div class="space-y-6">
-        <div data-aos="fade-right">
+      <h2 class="text-3xl font-semibold mb-8 text-center">Professional Journey</h2>
+      <div class="space-y-8">
+        <div class="timeline-item">
           <h3 class="text-xl font-semibold">Customer Service Representative, EchoDesk (Remote)</h3>
           <p class="text-gray-600">Sep 2023 - Present</p>
           <ul class="list-disc pl-5">
-            <li>Handle 60+ daily inquiries via phone, email, and chat, achieving 97% satisfaction.</li>
-            <li>Improved response time by 30% through optimized workflows.</li>
+            <li>Managed 60+ daily inquiries, achieving 97% satisfaction.</li>
+            <li>Reduced response time by 30% with optimized workflows.</li>
           </ul>
         </div>
-        <div data-aos="fade-left">
+        <div class="timeline-item">
           <h3 class="text-xl font-semibold">UI/UX & Web Designer, Nexora Digital (Remote)</h3>
           <p class="text-gray-600">Jan 2022 - Aug 2023</p>
           <ul class="list-disc pl-5">
-            <li>Designed responsive UI prototypes in Figma, boosting engagement by 22%.</li>
-            <li>Developed websites using HTML, CSS, and JavaScript, cutting development time by 15%.</li>
+            <li>Designed responsive UI prototypes, boosting engagement by 22%.</li>
+            <li>Developed websites, cutting development time by 15%.</li>
           </ul>
         </div>
-        <div data-aos="fade-right">
+        <div class="timeline-item">
           <h3 class="text-xl font-semibold">Graphic Designer, Artiva (Intern)</h3>
           <p class="text-gray-600">May 2021 - Nov 2021</p>
           <ul class="list-disc pl-5">
-            <li>Produced 10+ weekly social media graphics, boosting engagement by 70%.</li>
+            <li>Created 10+ weekly social media graphics, increasing engagement by 70%.</li>
           </ul>
         </div>
-        <div data-aos="fade-left">
+        <div class="timeline-item">
           <h3 class="text-xl font-semibold">Executive Administrative Assistant, EliteOrbit (Remote)</h3>
           <p class="text-gray-600">Feb 2020 - May 2021</p>
           <ul class="list-disc pl-5">
-            <li>Managed scheduling and CRM updates for executives.</li>
-            <li>Coordinated virtual meetings and streamlined workflows.</li>
+            <li>Streamlined scheduling and CRM updates for executives.</li>
           </ul>
         </div>
-        <div data-aos="fade-right">
+        <div class="timeline-item">
           <h3 class="text-xl font-semibold">Web Designer, Launchsync (Intern)</h3>
           <p class="text-gray-600">Nov 2018 - Nov 2019</p>
           <ul class="list-disc pl-5">
@@ -182,53 +252,53 @@
       </div>
     </div>
   </section>
-  <div class="divider"></div>
 
-  <section id="projects" class="py-16 bg-white" data-aos="fade-up">
+  <section id="projects" class="py-16 bg-white">
     <div class="max-w-4xl mx-auto px-4">
-      <h2 class="text-3xl font-bold mb-8 text-center">Selected Projects</h2>
+      <h2 class="text-3xl font-semibold mb-8 text-center">Selected Projects</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+        <div class="stats-item">
+          <h3 class="text-2xl font-semibold text-[#D4A017]"><span id="stat-projects">0</span></h3>
+          <p>Projects Completed</p>
+        </div>
+        <div class="stats-item">
+          <h3 class="text-2xl font-semibold text-[#D4A017]"><span id="stat-engagement">0</span>%</h3>
+          <p>Avg. Engagement Boost</p>
+        </div>
+        <div class="stats-item">
+          <h3 class="text-2xl font-semibold text-[#D4A017]"><span id="stat-experience">0</span>+</h3>
+          <p>Years Experience</p>
+        </div>
+      </div>
+      <div class="flex justify-center gap-4 mb-6">
+        <button class="filter-btn px-4 py-2 rounded-lg bg-gray-200 hover:bg-[#D4A017] hover:text-white active" data-filter="all">All</button>
+        <button class="filter-btn px-4 py-2 rounded-lg bg-gray-200 hover:bg-[#D4A017] hover:text-white" data-filter="uiux">UI/UX</button>
+        <button class="filter-btn px-4 py-2 rounded-lg bg-gray-200 hover:bg-[#D4A017] hover:text-white" data-filter="web">Web Design</button>
+        <button class="filter-btn px-4 py-2 rounded-lg bg-gray-200 hover:bg-[#D4A017] hover:text-white" data-filter="support">Customer Support</button>
+      </div>
       <div id="project-container" class="grid grid-cols-1 sm:grid-cols-2 gap-6"></div>
     </div>
   </section>
-  <div class="divider"></div>
 
-  <section id="testimonials" class="py-16 bg-offwhite" data-aos="fade-up">
+  <section id="certifications" class="py-16 bg-gray-50">
     <div class="max-w-4xl mx-auto px-4">
-      <h2 class="text-3xl font-bold mb-8 text-center">What Colleagues Say</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        <div class="bg-white p-6 rounded-lg shadow-md" data-aos="zoom-in">
-          <p class="italic">"Caleb’s empathy and problem-solving skills transformed our customer support at EchoDesk, achieving 97% satisfaction."</p>
-          <p class="mt-4 font-semibold">- Team Lead, EchoDesk</p>
-        </div>
-        <div class="bg-white p-6 rounded-lg shadow-md" data-aos="zoom-in">
-          <p class="italic">"His UI/UX designs at Nexora Digital were intuitive and boosted engagement by 22%. A true professional."</p>
-          <p class="mt-4 font-semibold">- Project Manager, Nexora Digital</p>
-        </div>
+      <h2 class="text-3xl font-semibold mb-8 text-center">Certifications</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="bg-white p-4 rounded-lg shadow-sm">Virtual Assistance Certification, Udemy</div>
+        <div class="bg-white p-4 rounded-lg shadow-sm">UI/UX Design Specialization, Google</div>
+        <div class="bg-white p-4 rounded-lg shadow-sm">Frontend Developer Certificate, SheCodes</div>
+        <div class="bg-white p-4 rounded-lg shadow-sm">Virtual Assistant Basics, Skillshare</div>
+        <div class="bg-white p-4 rounded-lg shadow-sm">Customer Service Excellence, Coursera</div>
+        <div class="bg-white p-4 rounded-lg shadow-sm">Emotional Intelligence in the Workplace, MindTools</div>
+        <div class="bg-white p-4 rounded-lg shadow-sm">Graphic Design with Canva, YouTube Academy</div>
+        <div class="bg-white p-4 rounded-lg shadow-sm">Remote Work Professional Certificate, Remote Skills Academy</div>
       </div>
     </div>
   </section>
-  <div class="divider"></div>
 
-  <section id="certifications" class="py-16 bg-white" data-aos="fade-up">
+  <section id="education" class="py-16 bg-white">
     <div class="max-w-4xl mx-auto px-4">
-      <h2 class="text-3xl font-bold mb-8 text-center">Certifications</h2>
-      <ul class="list-disc pl-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <li>Virtual Assistance Certification, Udemy</li>
-        <li>UI/UX Design Specialization, Google</li>
-        <li>Frontend Developer Certificate, SheCodes</li>
-        <li>Virtual Assistant Basics, Skillshare</li>
-        <li>Customer Service Excellence, Coursera</li>
-        <li>Emotional Intelligence in the Workplace, MindTools</li>
-        <li>Graphic Design with Canva, YouTube Academy</li>
-        <li>Remote Work Professional Certificate, Remote Skills Academy</li>
-      </ul>
-    </div>
-  </section>
-  <div class="divider"></div>
-
-  <section id="education" class="py-16 bg-offwhite" data-aos="fade-up">
-    <div class="max-w-4xl mx-auto px-4">
-      <h2 class="text-3xl font-bold mb-8 text-center">Education</h2>
+      <h2 class="text-3xl font-semibold mb-8 text-center">Education</h2>
       <div class="space-y-4">
         <div>
           <h3 class="text-xl font-semibold">B.Sc. Industrial Chemistry (Second Class Upper)</h3>
@@ -241,116 +311,234 @@
       </div>
     </div>
   </section>
-  <div class="divider"></div>
 
-  <section id="contact" class="py-16 bg-white" data-aos="fade-up">
+  <section id="contact" class="py-16 bg-gray-50">
     <div class="max-w-4xl mx-auto px-4">
-      <h2 class="text-3xl font-bold mb-8 text-center">Get in Touch</h2>
-      <div class="flex flex-col sm:flex-row gap-6">
+      <h2 class="text-3xl font-semibold mb-8 text-center">Let’s Collaborate</h2>
+      <div class="flex flex-col sm:flex-row gap-8">
         <div class="flex-1">
-          <p class="mb-4">Let’s collaborate on your next project in customer support, UI/UX, or web design.</p>
-          <p><strong>Email:</strong> <a href="mailto:calebdavidug@gmail.com" class="text-teal-500 hover:underline">calebdavidug@gmail.com</a></p>
-          <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/caleb-david-ug" target="_blank" class="text-teal-500 hover:underline">linkedin.com/in/caleb-david-ug</a></p>
+          <p class="mb-4">Ready to elevate your project with expert UI/UX, web design, or customer support solutions?</p>
+          <p><strong>Email:</strong> <a href="mailto:calebdavidug@gmail.com" class="text-[#D4A017] hover:underline">calebdavidug@gmail.com</a></p>
+          <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/caleb-david-ug" target="_blank" class="text-[#D4A017] hover:underline">linkedin.com/in/caleb-david-ug</a></p>
         </div>
         <div class="flex-1">
           <form class="space-y-4">
-            <input type="text" placeholder="Name" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-teal-500" />
-            <input type="email" placeholder="Email" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-teal-500" />
-            <textarea placeholder="Message" class="w-full p-3 border rounded-lg h-32 focus:ring-2 focus:ring-teal-500"></textarea>
-            <button type="submit" class="bg-coral-500 text-white px-8 py-3 rounded-lg hover:bg-coral-600 transition">Send</button>
+            <input type="text" placeholder="Name" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-[#D4A017]" />
+            <input type="email" placeholder="Email" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-[#D4A017]" />
+            <textarea placeholder="Message" class="w-full p-3 border rounded-lg h-32 focus:ring-2 focus:ring-[#D4A017]"></textarea>
+            <button type="submit" class="bg-[#D4A017] text-white px-8 py-3 rounded-lg hover:bg-[#B88E14] transition">Send</button>
           </form>
         </div>
       </div>
     </div>
   </section>
 
-  <footer class="bg-charcoal-900 text-white py-8 text-center">
+  <footer class="bg-[#1E2A44] text-white py-8 text-center">
     <div class="flex justify-center space-x-6 mb-4">
-      <a href="https://linkedin.com/in/caleb-david-ug" target="_blank" class="social-icon">
+      <a href="https://linkedin.com/in/caleb-david-ug" target="_blank" class="hover:text-[#D4A017] transition">
         <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"></path></svg>
       </a>
-      <a href="https://github.com/calebdavidug" target="_blank" class="social-icon">
+      <a href="https://github.com/calebdavidug" target="_blank" class="hover:text-[#D4A017] transition">
         <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75.98.8-.23 1.65-.34 2.5-.34s1.7.11 2.5.34c1.91-1.25 2.75-.98 2.75-.98.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"></path></svg>
       </a>
     </div>
     <p>© 2025 Caleb David Ugwabor. All rights reserved.</p>
+    <a href="#home" class="mt-4 inline-block text-[#D4A017] hover:underline">Back to Top</a>
   </footer>
 
   <script type="text/babel">
     const projects = [
       {
         title: "CRM Workflow Optimization",
-        description: "Streamlined customer inquiry handling at EchoDesk using HubSpot, reducing response time by 30% and boosting satisfaction to 97%.",
+        description: "Streamlined inquiry handling at EchoDesk using HubSpot, reducing response time by 30%.",
         tools: "HubSpot, Notion",
-        link: "./projects/crm-optimization.html"
+        link: "./projects/crm-optimization.html",
+        category: "support",
+        outcomes: ["30% faster response time", "97% customer satisfaction"]
       },
       {
         title: "AI Chatbot Support System",
-        description: "Designed a chatbot interface for EchoDesk with Figma and JavaScript, improving first-contact resolution by 25% for remote teams.",
+        description: "Designed a chatbot interface for EchoDesk, improving resolution by 25%.",
         tools: "Figma, JavaScript",
-        link: "./projects/chatbot-system.html"
+        link: "./projects/chatbot-system.html",
+        category: "uiux",
+        outcomes: ["25% improved resolution", "Enhanced user experience"]
       },
       {
         title: "Mobile Banking App UI",
-        description: "Created a user-friendly mobile banking app prototype in Figma at Nexora Digital, enhancing navigation and increasing engagement by 20%.",
+        description: "Created a mobile banking app prototype, boosting engagement by 20%.",
         tools: "Figma, Adobe XD",
-        link: "./projects/mobile-banking-ui.html"
+        link: "./projects/mobile-banking.html",
+        category: "uiux",
+        outcomes: ["20% engagement boost", "Intuitive navigation"]
       },
       {
         title: "SaaS Platform Redesign",
-        description: "Redesigned a SaaS platform's UI/UX in Figma for Nexora Digital, improving usability and reducing onboarding time by 15%.",
+        description: "Redesigned a SaaS platform’s UI/UX, reducing onboarding time by 15%.",
         tools: "Figma, Sketch",
-        link: "./projects/saas-redesign.html"
+        link: "./projects/saas-redesign.html",
+        category: "uiux",
+        outcomes: ["15% faster onboarding", "Improved usability"]
       },
       {
         title: "Freelance Portfolio Website",
-        description: "Developed a responsive portfolio site using HTML, CSS, JavaScript, and WordPress at Launchsync, ensuring cross-device compatibility.",
+        description: "Developed a responsive portfolio site with cross-device compatibility.",
         tools: "HTML, CSS, JavaScript, WordPress",
-        link: "./projects/portfolio-website.html"
+        link: "./projects/portfolio-website.html",
+        category: "web",
+        outcomes: ["Cross-device compatibility", "Modern design"]
+      },
+      {
+        title: "Executive Admin Workflow System",
+        description: "Designed a scheduling and CRM system for EliteOrbit, reducing admin time by 20%.",
+        tools: "Asana, Zoho, Google Calendar",
+        link: "./projects/admin-workflow.html",
+        category: "support",
+        outcomes: ["20% admin time reduction", "Improved executive efficiency"]
+      },
+      {
+        title: "The Winsome Experience Website",
+        description: "Built a vibrant website for The Winsome Experience, boosting inquiries by 25%.",
+        tools: "HTML, CSS, JavaScript, WordPress",
+        link: "./projects/event-planning.html",
+        category: "web",
+        outcomes: ["25% inquiry increase", "Responsive design"]
       },
       {
         title: "Executive Workflow Automation",
-        description: "Automated scheduling and CRM updates at EliteOrbit using Asana and Zoho, cutting meeting prep time by 20%.",
+        description: "Automated task management at EliteOrbit, cutting prep time by 20%.",
         tools: "Asana, Zoho, Google Calendar",
-        link: "./projects/workflow-automation.html"
-      },
-      {
-        title: "Event Planning Company Website",
-        description: "Designed and developed a vibrant website for an event planning company using HTML, CSS, JavaScript, and WordPress, boosting client inquiries by 25%.",
-        tools: "HTML, CSS, JavaScript, WordPress",
-        link: "./projects/event-planning-website.html"
+        link: "./projects/workflow-automation.html",
+        category: "support",
+        outcomes: ["20% time savings", "Streamlined workflows"]
       }
     ];
 
-    const ProjectCard = ({ title, description, tools, link }) => (
-      <div className="project-card">
-        <div className="project-card-inner">
+    const ProjectCard = ({ title, description, tools, link, category, outcomes, onClick }) => (
+      <div className={`project-card bg-white relative`} data-category={category} onClick={onClick}>
+        <div className="p-6">
           <h3 className="text-xl font-semibold mb-2">{title}</h3>
           <p className="mb-2">{description}</p>
           <p className="text-sm text-gray-600 mb-4"><strong>Tools:</strong> {tools}</p>
-          <a href={link} target="_blank" className="bg-teal-500 text-white px-4 py-2 rounded-lg hover:bg-teal-600 transition">View Project</a>
+          <button className="bg-[#D4A017] text-white px-4 py-2 rounded-lg hover:bg-[#B88E14] transition">View Project</button>
+        </div>
+        <div className="project-overlay absolute inset-0 flex items-center justify-center text-white text-center">
+          <p>Explore {title}</p>
         </div>
       </div>
     );
 
-    const ProjectList = () => (
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        {projects.map((project, index) => (
-          <ProjectCard key={index} title={project.title} description={project.description} tools={project.tools} link={project.link} />
-        ))}
+    const ProjectModal = ({ project, onClose }) => (
+      <div className="modal">
+        <div className="modal-content">
+          <span className="modal-close" onClick={onClose}>×</span>
+          <h3 className="text-2xl font-semibold mb-4">{project.title}</h3>
+          <p className="mb-4">{project.description}</p>
+          <p className="text-sm text-gray-600 mb-4"><strong>Tools:</strong> {project.tools}</p>
+          <ul className="list-disc pl-5 mb-4">
+            {project.outcomes.map((outcome, index) => (
+              <li key={index}>{outcome}</li>
+            ))}
+          </ul>
+          <a href={project.link} target="_blank" className="inline-block bg-[#1E2A44] text-white px-6 py-2 rounded-lg hover:bg-[#2D3A54] transition">View Demo</a>
+        </div>
       </div>
     );
 
+    const ProjectList = () => {
+      const [filter, setFilter] = React.useState('all');
+      const [selectedProject, setSelectedProject] = React.useState(null);
+
+      const filteredProjects = filter === 'all' ? projects : projects.filter(p => p.category === filter);
+
+      return (
+        <div>
+          {selectedProject && <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />}
+          {filteredProjects.map((project, index) => (
+            <ProjectCard key={index} {...project} onClick={() => setSelectedProject(project)} />
+          ))}
+        </div>
+      );
+    };
+
     const root = ReactDOM.createRoot(document.getElementById('project-container'));
     root.render(<ProjectList />);
+
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.getAttribute('data-filter');
+        const container = document.getElementById('project-container');
+        container.innerHTML = '';
+        const filteredProjects = filter === 'all' ? projects : projects.filter(p => p.category === filter);
+        ReactDOM.render(
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <ProjectList />
+          </div>,
+          container
+        );
+      });
+    });
   </script>
   <script>
-    AOS.init({ duration: 1000 });
-    const cursor = document.getElementById('cursor');
-    document.addEventListener('mousemove', (e) => {
-      cursor.style.left = e.pageX + 'px';
-      cursor.style.top = e.pageY + 'px';
+    gsap.from('.hero h2', { opacity: 0, y: 50, duration: 1, delay: 0.5 });
+    gsap.from('.hero p', { opacity: 0, y: 50, duration: 1, delay: 0.7 });
+    gsap.from('.hero a', { opacity: 0, y: 50, duration: 1, delay: 0.9 });
+    gsap.from('.about-section', {
+      scrollTrigger: {
+        trigger: '.about-section',
+        start: 'top 80%',
+      },
+      opacity: 0,
+      y: 50,
+      duration: 1
     });
+    gsap.utils.toArray('.project-card').forEach((card, i) => {
+      gsap.from(card, {
+        scrollTrigger: {
+          trigger: card,
+          start: 'top 80%',
+        },
+        opacity: 0,
+        x: i % 2 === 0 ? -100 : 100,
+        duration: 0.8
+      });
+    });
+    gsap.to('#stat-projects', {
+      scrollTrigger: {
+        trigger: '.stats-item',
+        start: 'top 80%',
+      },
+      innerHTML: 8,
+      duration: 2,
+      snap: { innerHTML: 1 }
+    });
+    gsap.to('#stat-engagement', {
+      scrollTrigger: {
+        trigger: '.stats-item',
+        start: 'top 80%',
+      },
+      innerHTML: 25,
+      duration: 2,
+      snap: { innerHTML: 1 }
+    });
+    gsap.to('#stat-experience', {
+      scrollTrigger: {
+        trigger: '.stats-item',
+        start: 'top 80%',
+      },
+      innerHTML: 5,
+      duration: 2,
+      snap: { innerHTML: 1 }
+    });
+    const updateProgress = () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = (scrollTop / docHeight) * 100;
+      document.getElementById('scrollProgress').style.width = scrolled + '%';
+    };
+    window.addEventListener('scroll', updateProgress);
   </script>
 </body>
 </html>
